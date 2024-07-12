@@ -18,7 +18,7 @@ local rate = 1.5
 -- The filename for the bookmarks file
 local bookmarkerName = "bookmarker.json"
 -- Use separate bookmark table for each file
-local separateTable = false
+local separateTable = true
 
 -- All the "global" variables and utilities; don't touch these
 local utils = require 'mp.utils'
