@@ -602,7 +602,7 @@ function jumpToBookmark(slot)
       if parsePath(mp.get_property("path")) == bookmark["path"] then
         mp.set_property_number("time-pos", bookmark["pos"])
       else
-        mp.commandv("loadfile", parsePath(bookmark["path"]), "replace", "start="..bookmark["pos"])
+        mp.commandv("loadfile", parsePath(bookmark["path"]), "replace", -1, "start="..bookmark["pos"])
       end
       if closeAfterLoad then abort(styleOn.."{\\c&H00FF00&}{\\b1}Successfully found file for bookmark:{\\r}\n"..displayName(bookmark["name"])) end
     else
