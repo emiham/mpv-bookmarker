@@ -1,4 +1,4 @@
--- // Bookmarker Menu v1.3.1 for mpv \\ --
+-- // Bookmarker Menu v1.4.0 for mpv \\ --
 -- See README.md for instructions
 
 -- Maximum number of characters for bookmark name
@@ -266,7 +266,7 @@ end
 function getFilepath(filename)
   if isWindows() then
   	return os.getenv("APPDATA"):gsub("\\", "/") .. "/mpv/" .. filename
-  else	
+  else
 	return os.getenv("HOME") .. "/.config/mpv/" .. filename
   end
 end
@@ -613,6 +613,51 @@ function jumpToBookmark(slot)
   end
 end
 
+local function findClosest(cur_pos)
+  local closest_i = nil
+  local closest_diff = math.huge
+
+  for i, entry in ipairs(bookmarks) do
+    local diff = math.abs(entry.pos - cur_pos)
+    if diff < closest_diff then
+      closest_diff = diff
+      closest_i = i
+    end
+  end
+
+  return closest_i
+end
+
+function nextBookmark()
+  if not active then
+    loadBookmarks()
+    local cur_pos = mp.get_property_number("time-pos")
+    local slot = findClosest(cur_pos)
+    if bookmarks[slot]["pos"] > cur_pos then
+      jumpToBookmark(slot)
+    else
+      if slot < #bookmarks then
+        jumpToBookmark(slot + 1)
+      end
+    end
+  end
+end
+
+function prevBookmark()
+  if not active then
+    loadBookmarks()
+    local cur_pos = mp.get_property_number("time-pos")
+    local slot = findClosest(cur_pos)
+    if cur_pos - bookmarks[slot]["pos"] > 5 then
+      jumpToBookmark(slot)
+    else
+      if slot > 1 then
+        jumpToBookmark(slot - 1)
+      end
+    end
+  end
+end
+
 -- Displays the current page of bookmarks
 function displayBookmarks()
   -- Determine which slot is the first and last on the current page
@@ -716,3 +761,5 @@ end
 mp.register_script_message("bookmarker-menu", handler)
 mp.register_script_message("bookmarker-quick-save", quickSave)
 mp.register_script_message("bookmarker-quick-load", quickLoad)
+mp.register_script_message("bookmarker-next", nextBookmark)
+mp.register_script_message("bookmarker-prev", prevBookmark)
