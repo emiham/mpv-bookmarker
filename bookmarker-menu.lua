@@ -1,4 +1,4 @@
--- // Bookmarker Menu v1.4.1 for mpv \\ --
+-- // Bookmarker Menu v1.4.2 for mpv \\ --
 -- See README.md for instructions
 
 -- Maximum number of characters for bookmark name
