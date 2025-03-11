@@ -274,11 +274,17 @@ end
 
 -- Get the filepath of a file from the mpv config folder
 function getFilepath(filename)
+  local filepath
   if isWindows() then
-  	return os.getenv("APPDATA"):gsub("\\", "/") .. "/mpv/" .. filename
+  	filepath = os.getenv("APPDATA"):gsub("\\", "/") .. "/mpv/" .. filename
   else
-	return os.getenv("HOME") .. "/.config/mpv/" .. filename
+        local directory = os.getenv("HOME") .. "/.local/state/mpv/bookmarks/"
+        if not fileExists(directory) then
+          os.execute("mkdir " .. directory)
+        end
+	filepath = directory .. filename
   end
+  return filepath
 end
 
 -- Load a table from a JSON file
