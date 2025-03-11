@@ -110,6 +110,15 @@ For example, `Awesome moment @ %t` will show up as `Awesome moment @ 00:13:41.67
 This has been tested on Windows. In theory, it should also work for Unix systems, but it hasn't been tested on those.
 
 ## Changelog
+#### Version 1.4.2
+* Changed bookmark location to `~/.local/state/mpv/bookmarks` on Linux, to not
+  clutter mpv config directory
+
+#### Version 1.4.1
+* Added optional vim bindings
+
+#### Version 1.4.0
+* Added functions to go to the previous and next bookmarks
 
 #### Version 1.3.1
 
