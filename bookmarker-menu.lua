@@ -1,4 +1,4 @@
--- // Bookmarker Menu v1.4.0 for mpv \\ --
+-- // Bookmarker Menu v1.4.1 for mpv \\ --
 -- See README.md for instructions
 
 -- Maximum number of characters for bookmark name
@@ -42,6 +42,10 @@ local bookmarkerControls = {
   UP = function() jumpSlot(-1) end,
   RIGHT = function() jumpPage(1) end,
   LEFT = function() jumpPage(-1) end,
+  j = function() jumpSlot(1) end,
+  k = function() jumpSlot(-1) end,
+  h = function() jumpPage(1) end,
+  l = function() jumpPage(-1) end,
   s = function() addBookmark() end,
   S = function() mode="save" typerStart() end,
   p = function() mode="replace" typerStart() end,
@@ -49,6 +53,7 @@ local bookmarkerControls = {
   f = function() mode="filepath" typerStart() end,
   m = function() mode="move" moverStart() end,
   DEL = function() mode="delete" typerStart() end,
+  d = function() mode="delete" typerStart() end,
   ENTER = function() jumpToBookmark(currentSlot) end,
   KP_ENTER = function() jumpToBookmark(currentSlot) end
 }
